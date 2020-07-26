@@ -89,10 +89,7 @@ class Board extends Component {
     this.setState({ board, hasWon });
   }
 
-  /** Render game board or winning message. */
-
-  render() {
-    if (this.state.hasWon) return <h1>YOU WON!!!</h1>;
+  makeBoard() {
     let tblBoard = [];
     for (let x = 0; x < this.props.nrows; x++) {
       let row = [];
@@ -112,6 +109,29 @@ class Board extends Component {
       <table className="Board">
         <tbody>{tblBoard}</tbody>
       </table>
+    );
+  }
+
+  /** Render game board or winning message. */
+
+  render() {
+    return (
+      <div>
+        {this.state.hasWon ? (
+          <div className="winner">
+            <span className="neon-orange">YOU</span>
+            <span className="neon-blue">WIN!</span>
+          </div>
+        ) : (
+          <div>
+            <div className="Board-title">
+              <div className="neon-orange">Lights</div>
+              <div className="neon-blue">Out</div>
+            </div>
+            {this.makeBoard()}
+          </div>
+        )}
+      </div>
     );
   }
 }
